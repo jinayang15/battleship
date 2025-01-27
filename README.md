@@ -1,0 +1,1 @@
+This is Battleship web game
