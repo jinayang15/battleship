@@ -44,11 +44,11 @@ export default class Gameboard {
   }
   // returns false if not hit, returns the ship if hit
   receiveAttack(row, col) {
+    this.attacks.push([row, col]);
     for (const [ship, coords] of this.ships) {
       for (const coord of coords) {
         if (row === coord[0] && col === coord[1]) {
           ship.hit();
-          this.attacks.push([row, col]);
           return ship;
         }
       }
@@ -68,6 +68,12 @@ export default class Gameboard {
       }
     }
     this.ships.set(ship, coords);
+    return true;
+  }
+  isAllSunk() {
+    for (const [ship, coords] of this.ships) {
+      if (!ship.isSunk()) return false;
+    }
     return true;
   }
 }
